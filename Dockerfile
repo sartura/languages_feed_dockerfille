@@ -20,14 +20,16 @@ RUN \
       python \
       vim \
       libssl-dev && \
-      apt-get clean && \
+      apt-get clean
+
+# create openwrt user
+RUN \
       useradd -m openwrt && \
       echo 'openwrt ALL=NOPASSWD: ALL' > /etc/sudoers.d/openwrt
-
 USER openwrt
-
 WORKDIR /home/openwrt
 
+# clone openwrt
 RUN \
       git clone https://github.com/openwrt/openwrt.git openwrt && \
       cd openwrt && \
