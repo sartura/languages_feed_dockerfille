@@ -55,15 +55,15 @@ RUN \
       cd /opt && \
       sudo git clone https://github.com/sartura/languages_feed
 
-# build raspberry pi 3 image
-COPY rp3_config rp3_config
-
-RUN cp rp3_config ./openwrt/.config
-
 RUN \
       cd openwrt && \
       echo "src-link languages /opt/languages_feed" >> feeds.conf && \
       ./scripts/feeds update -a; ./scripts/feeds install -a
+
+# build raspberry pi 3 image
+COPY rp3_config rp3_config
+
+RUN cp rp3_config ./openwrt/.config
 
 RUN cd openwrt && make defconfig
 
