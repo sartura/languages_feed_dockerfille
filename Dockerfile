@@ -68,3 +68,12 @@ RUN \
 RUN cd openwrt && make defconfig
 
 RUN cd openwrt && make -j4
+
+# build ClearFog Base image
+COPY clearfog_config clearfog_config
+
+RUN cp clearfog_config ./openwrt/.config
+
+RUN cd openwrt && make defconfig
+
+RUN cd openwrt && make -j4
